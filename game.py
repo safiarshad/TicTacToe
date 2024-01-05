@@ -12,5 +12,22 @@ class TicTacToe:
     def print_board_nums():
         # 0 | 1 | 2 etc (the corresponding numbers to the boxes)
         number_board = [[str(i) for i in range (j*3, (j+1)*3)] for j in range(3)]
+        for row in number_board:
+            print(' |' + ' |'.join(row) + ' |')     
 
-        print ("something")
+    def avaibalbe_moves(self):
+        #returns a [] of remaining moves or boxes
+        moves = []
+        for (i, spot) in enumerate(self.board):  #the enumrate in here enumrtes the indexes using tuple to represent the value in the box
+            # ['x', 'x', 'o']  --> [(0, 'x'), (1, 'x'), (2, 'o')]
+            if spot == ' ':
+                moves.append(i)
+                
+        return moves
+        #or the below line instead of the multiple line 
+        #return [i for i, spot in enumerate(self.board) if spot == ' ']
+    
+
+
+
+
