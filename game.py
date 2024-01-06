@@ -27,6 +27,27 @@ class TicTacToe:
         #or the below line instead of the multiple line 
         #return [i for i, spot in enumerate(self.board) if spot == ' ']
     
+    def empty_squares(self):
+        return ' ' in self.board
+    
+    def num_empty_square(self):
+        return len.avaibalbe_moves
+    
+
+    def play(game, x_Player, o_Player, print_game=True):
+        if print_game:
+            game.print_board_nums()
+
+        letter = 'X' #Staring 
+        """
+        While there're empty squares in the game this should keep iterating.
+        (The winner would be returned which will break the loop).
+        """
+        while game.empty_squares():
+            pass
+
+
+    
 
 
 
