@@ -20,7 +20,8 @@ class RandomComputerPlayer(Player):
         #the line above calls the init in the super class whic is "Player"
 
     def get_move(self, game):
-        pass
+        return random.choice(game.avaibalbe_moves())
+                      
 
 
 class HumanPlayer(Player):
@@ -28,4 +29,21 @@ class HumanPlayer(Player):
         super().__init__(letter)
 
     def get_move(self, game):
-        pass
+        #We want the human to have the ability of choosing a spot based on some Input thro terminal
+        valid_square = False
+        val = None # bcz the user hasn't put an input yet
+        while not valid_square: #simply saying while valid square is false
+            square = input(self.letter + "\'s turn. Input move (0-9): ")
+
+            """
+            We are goin to check that this input is a correct value by converting it to an int
+            (or we say ivalid if that's not the case).
+            The return would also be invalid if the spot on the board is already taken.
+
+            """
+            try:
+                val = int(square)
+                if val not in game.avaibalbe_moves():
+                    raise ValueError
+                
+
