@@ -33,6 +33,13 @@ class TicTacToe:
     def num_empty_square(self):
         return len.avaibalbe_moves
     
+    def make_move(self, square, letter):
+        if self.board[square] == ' ':
+            self.board[square] == letter
+            return True
+        return False
+        
+
 
     def play(game, x_Player, o_Player, print_game=True):
         if print_game:
@@ -44,7 +51,23 @@ class TicTacToe:
         (The winner would be returned which will break the loop).
         """
         while game.empty_squares():
-            pass
+            #getting the move from the right player
+            if letter == 'O':
+                square =  o_Player.get_move(game)
+            else:
+                square = x_Player.get_move(game)
+
+            if game.make_move(square, letter):
+                if print_game:
+                    print(letter + f"makes a move to square {square}")
+                    game.print_board()
+                    print('')#an empty line 
+
+                #after the first move, the letters should be alternate
+                letter = 'O' if letter =='X' else 'X'
+        
+
+            
 
 
     
