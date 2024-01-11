@@ -37,7 +37,7 @@ class TicTacToe:
     
     def make_move(self, square, letter):
         if self.board[square] == ' ':
-            self.board[square] == letter
+            self.board[square] = letter
             if self.winner(square, letter):
                 self.current_winner = letter
 
@@ -71,57 +71,52 @@ class TicTacToe:
             
         #if all fail no winner
         return False
+    
+
                 
-    def play(game, x_Player, o_Player, print_game=True):
-       
-        if print_game:
-            game.print_board_nums()
+def play(game, x_Player, o_Player, print_game=True):
+    if print_game:
+        game.print_board_nums()
 
-        letter = 'X' #Staring 
-        """
-        While there're empty squares in the game this should keep iterating.
-        (The winner would be returned which will break the loop).
-        """
-        while game.empty_squares():
-            #getting the move from the right player
-            if letter == 'O':
-                square =  o_Player.get_move(game)
-            else:
-                square = x_Player.get_move(game)
+    letter = 'X' #Staring 
+    """
+    While there're empty squares in the game this should keep iterating.
+    (The winner would be returned which will break the loop).
+    """
+    while game.empty_squares():
+        #getting the move from the right player
+        if letter == 'O':
+            square =  o_Player.get_move(game)
+        else:
+            square = x_Player.get_move(game)
 
-            if game.make_move(square, letter):
-                if print_game:
-                    print(letter + f"makes a move to square {square}")
-                    game.print_board()
-                    print('')#an empty line 
-
-                if game.current_winner:
-                    if print_game:
-                        print(letter + " wins!")
-                    return letter
-
-
-                #after the first move, the letters should be alternate
-                letter = 'O' if letter =='X' else 'X'
-
+        if game.make_move(square, letter):
             if print_game:
-                print("it\'s a tie!")
-        
+                print(letter + f"makes a move to square {square}")
+                game.print_board()
+                print('')#an empty line 
 
-if __name__ == '__main__':
+            if game.current_winner:
+                if print_game:
+                    print(letter + " wins!")
+                return letter
+
+
+            #after the first move, the letters should be alternate
+            letter = 'O' if letter =='X' else 'X'
+
+    if print_game:
+            print("it\'s a tie!")
+
+
+def main():
     x_Player = HumanPlayer('X')
     o_Player = RandomComputerPlayer('O')
     t = TicTacToe()
     play(t, x_Player, o_Player, print_game=True)
 
+        
 
-
-
-            
-
-
+if __name__ == '__main__':  
+    main()
     
-
-
-
-
