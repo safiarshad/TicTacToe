@@ -45,5 +45,10 @@ class HumanPlayer(Player):
                 val = int(square)
                 if val not in game.avaibalbe_moves():
                     raise ValueError
-                
+                valid_square = True
+            except ValueError:
+                print("Invalid suqare, Try again!")
+
+        return val
+
 

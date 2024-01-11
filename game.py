@@ -36,12 +36,27 @@ class TicTacToe:
     def make_move(self, square, letter):
         if self.board[square] == ' ':
             self.board[square] == letter
+            if self.winner(square, letter):
+                self.current_winner = letter
+
             return True
         return False
         
+    def winner(self, square, letter):
+        #if 3 in a row anywhere, then winner!
+        #checking the row:
+        row_index = square // 3 
+        row = self.board[row_index*3 : (row_index + 1) *3]
+        if all([spot == letter for spot in row]):
+            return True
+
+
+
+
 
 
     def play(game, x_Player, o_Player, print_game=True):
+       
         if print_game:
             game.print_board_nums()
 
@@ -63,8 +78,17 @@ class TicTacToe:
                     game.print_board()
                     print('')#an empty line 
 
+                if game.current_winner:
+                    if print_game:
+                        print(letter + " wins!")
+                    return letter
+
+
                 #after the first move, the letters should be alternate
                 letter = 'O' if letter =='X' else 'X'
+
+            if print_game:
+                print("it\'s a tie!")
         
 
             
