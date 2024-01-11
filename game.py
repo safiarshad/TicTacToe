@@ -1,3 +1,5 @@
+from Player import HumanPlayer, RandomComputerPlayer, Player
+
 class TicTacToe:
     def __init__(self):
         self.board = [' ' for _ in range(9)] #this list is used to represent a 3x3 board 
@@ -49,12 +51,27 @@ class TicTacToe:
         row = self.board[row_index*3 : (row_index + 1) *3]
         if all([spot == letter for spot in row]):
             return True
+        
+        #check the column for winner
+        col_index = square % 3
+        column = [self.board[col_index+i*3] for i in range(3)]
+        if all([spot == letter for spot in column]):
+            return True
+        
+        #checking diagnaly
+        #if the square is an even num that's the only way to win diagonally (0, 2, 4, 6, 8)
+        if square % 2 == 0:
+            diagonal1 = [self.board[i] for i in [0, 4, 8]]
+            if all([spot == letter for spot in diagonal1]):
+                return True
 
-
-
-
-
-
+            digonal2 = [self.board[i] for i in [2, 4, 6]]
+            if all([spot == letter for spot in digonal2]):
+                return True
+            
+        #if all fail no winner
+        return False
+                
     def play(game, x_Player, o_Player, print_game=True):
        
         if print_game:
@@ -90,6 +107,15 @@ class TicTacToe:
             if print_game:
                 print("it\'s a tie!")
         
+
+if __name__ == '__main__':
+    x_Player = HumanPlayer('X')
+    o_Player = RandomComputerPlayer('O')
+    t = TicTacToe()
+    play(t, x_Player, o_Player, print_game=True)
+
+
+
 
             
 
