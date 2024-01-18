@@ -1,5 +1,6 @@
 import math 
-import random 
+import random
+from typing import Self 
 
 class Player:
     def __init__(self, letter):
@@ -50,5 +51,54 @@ class HumanPlayer(Player):
                 print("Invalid suqare, Try again!")
 
         return val
+
+
+class GeniusComPlayer(Player):
+    def __init__(self, letter):
+        super().__init__(letter)
+
+    def get_move(self, game):
+        if len(game.avaibalbe_moves()) == 9:
+            square = random.choice(game.avaibalbe_moves()) #Choosing Random Square
+        else:
+            #get the square based on minimax algorithm
+            square = self.minimax(game, self.letter)
+
+        return square
+
+    def minimax(self, state, player):  #state is the state of the game, where are we at the game
+        max_player = self.letter #the Player (you)
+        other_player = 'O' if player == 'X'
+
+        #to being with, was the previous move a winner? 
+        if state.current_winner == other_player:
+            #it is best to return both position and score for our algorithm (minimax) to work
+            return {"Position" : None,
+                    "score" : 1 * (state.num_empty_square() + 1) if other_player == max_player else -1 * (
+                        state.nu + 1)
+                        }
+        elif not state.empty_squares(): #no empty square
+            return {"Position" : None,
+                    "score" : 0 }
+        
+        if player == max_player:
+            best = {"Position": None, "Score": -math.inf } #each score should maximise
+            #the dic stores the "best" available moves to win
+        else:
+            best = {"Position": None, "Score": math.inf } #each score should minimise
+
+        for possible_move in state.avaibalbe_moves():
+            
+
+
+
+
+
+
+
+
+    
+
+
 
 

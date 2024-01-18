@@ -79,11 +79,12 @@ def play(game, x_Player, o_Player, print_game=True):
         game.print_board_nums()
 
     letter = 'X' #Staring 
-    """
+    
+    while game.empty_squares():
+        """
     While there're empty squares in the game this should keep iterating.
     (The winner would be returned which will break the loop).
-    """
-    while game.empty_squares():
+        """
         #getting the move from the right player
         if letter == 'O':
             square =  o_Player.get_move(game)
@@ -92,7 +93,7 @@ def play(game, x_Player, o_Player, print_game=True):
 
         if game.make_move(square, letter):
             if print_game:
-                print(letter + f"makes a move to square {square}")
+                print(letter + f"makes a move to square  {square}")
                 game.print_board()
                 print('')#an empty line 
 
