@@ -62,13 +62,13 @@ class GeniusComPlayer(Player):
             square = random.choice(game.avaibalbe_moves()) #Choosing Random Square
         else:
             #get the square based on minimax algorithm
-            square = self.minimax(game, self.letter)
+            square = self.minimax(game, self.letter)["Position"]
 
         return square
 
     def minimax(self, state, player):  #state is the state of the game, where are we at the game
         max_player = self.letter #the Player (you)
-        other_player = 'O' if player == 'X'
+        other_player = 'O' if player == 'X' else 'X'
 
         #to being with, was the previous move a winner? 
         if state.current_winner == other_player:
@@ -88,7 +88,17 @@ class GeniusComPlayer(Player):
             best = {"Position": None, "Score": math.inf } #each score should minimise
 
         for possible_move in state.avaibalbe_moves():
-            
+
+            #a) make a move, and try that spot
+            state.make_move(possible_move, player)
+
+            #b) recurse using minimax to simulate a game after making that move
+
+            #c) unde the move
+
+
+            #d) update the the dicts if needed
+
 
 
 
