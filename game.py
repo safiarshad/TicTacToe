@@ -1,4 +1,4 @@
-from Player import HumanPlayer, RandomComputerPlayer, Player
+from Player import HumanPlayer, RandomComputerPlayer, Player, GeniusComPlayer
 
 class TicTacToe:
     def __init__(self):
@@ -17,7 +17,7 @@ class TicTacToe:
         for row in number_board:
             print(' |' + ' |'.join(row) + ' |')     
 
-    def avaibalbe_moves(self):
+    def available_moves(self):
         #returns a [] of remaining moves or boxes
         moves = []
         for (i, spot) in enumerate(self.board):  #the enumrate in here enumrtes the indexes using tuple to represent the value in the box
@@ -32,8 +32,8 @@ class TicTacToe:
     def empty_squares(self):
         return ' ' in self.board
     
-    def num_empty_square(self):
-        return len.avaibalbe_moves
+    def num_empty_squares(self):
+        return self.board.count(' ')
     
     def make_move(self, square, letter):
         if self.board[square] == ' ':
@@ -112,7 +112,7 @@ def play(game, x_Player, o_Player, print_game=True):
 
 def main():
     x_Player = HumanPlayer('X')
-    o_Player = RandomComputerPlayer('O')
+    o_Player = GeniusComPlayer('O')
     t = TicTacToe()
     play(t, x_Player, o_Player, print_game=True)
 

@@ -2,6 +2,7 @@ import math
 import random
 from typing import Self 
 
+
 class Player:
     def __init__(self, letter):
         # letter is 'x' or 'o'
@@ -21,7 +22,7 @@ class RandomComputerPlayer(Player):
         #the line above calls the init in the super class whic is "Player"
 
     def get_move(self, game):
-        return random.choice(game.avaibalbe_moves())
+        return random.choice(game.available_moves())
                       
 
 
@@ -44,7 +45,7 @@ class HumanPlayer(Player):
             """
             try:
                 val = int(square)
-                if val not in game.avaibalbe_moves():
+                if val not in game.available_moves():
                     raise ValueError
                 valid_square = True
             except ValueError:
@@ -58,8 +59,8 @@ class GeniusComPlayer(Player):
         super().__init__(letter)
 
     def get_move(self, game):
-        if len(game.avaibalbe_moves()) == 9:
-            square = random.choice(game.avaibalbe_moves()) #Choosing Random Square
+        if len(game.available_moves()) == 9:
+            square = random.choice(game.available_moves()) #Choosing Random Square
         else:
             #get the square based on minimax algorithm
             square = self.minimax(game, self.letter)["Position"]
@@ -74,12 +75,12 @@ class GeniusComPlayer(Player):
         if state.current_winner == other_player:
             #it is best to return both position and score for our algorithm (minimax) to work
             return {"Position" : None,
-                    "Score" : 1 * (state.num_empty_square() + 1) if other_player == max_player else -1 * (
-                        state.nu + 1)
+                    "Score" : 1 * (state.num_empty_squares() + 1) if other_player == max_player else -1 * (
+                        state.num_empty_squares() + 1)
                         }
         elif not state.empty_squares(): #no empty square
             return {"Position" : None,
-                    "score" : 0 }
+                    "Score" : 0 }
         
         if player == max_player:
             best = {"Position": None, "Score": -math.inf } #each score should maximise
@@ -87,7 +88,7 @@ class GeniusComPlayer(Player):
         else:
             best = {"Position": None, "Score": math.inf } #each score should minimise
 
-        for possible_move in state.avaibalbe_moves():
+        for possible_move in state.available_moves():
 
             #a) make a move, and try that spot
             state.make_move(possible_move, player)
